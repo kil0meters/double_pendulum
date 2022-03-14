@@ -1,4 +1,4 @@
-use std::{f64::consts::PI, time::Instant};
+use std::f64::consts::PI;
 
 use ppm::PPM;
 
@@ -17,17 +17,17 @@ impl Position {
 }
 
 struct DoublePendulum {
-    l1: f64, // Length of 1st pendulum
-    l2: f64, // Length of 2nd pendulum
-    a1: f64, // Angle of 1st pendulum
-    a1v: f64,
-    a1a: f64,
-    a2: f64, // Angle of 2nd pendulum with respect to 1st
-    a2v: f64,
-    a2a: f64,
-    m1: f64,
-    m2: f64,
-    g: f64, // Force of gravity
+    l1: f64,  // Length of 1st pendulum
+    l2: f64,  // Length of 2nd pendulum
+    a1: f64,  // Angle of 1st pendulum
+    a1v: f64, // Velocity of 1st pendulum
+    a1a: f64, // Acceleration of 1st pendulum
+    a2: f64,  // Angle of 2nd pendulum with respect to 1st
+    a2v: f64, // Velocity of 2nd pendulum
+    a2a: f64, // Acceleration of 2nd pendulum
+    m1: f64,  // Mass of 1st pendulum
+    m2: f64,  // Mass of 2nd pendulum
+    g: f64,   // Force of gravity
 }
 
 impl DoublePendulum {
@@ -133,18 +133,7 @@ fn wow(x: usize, y: usize) -> (u8, u8, u8) {
 }
 
 fn main() {
-    let mut double_pendulum = DoublePendulum::new();
-
-    double_pendulum.a1 = PI / 4.0;
-    double_pendulum.a2 = PI / 4.0;
-
-    let start = Instant::now();
     let mut image = PPM::new(WIDTH, HEIGHT);
-    println!("{}", start.elapsed().as_millis());
-
     image.color_with(wow);
-    println!("{}", start.elapsed().as_millis());
-
     image.write("./image.ppm").unwrap();
-    println!("{}", start.elapsed().as_millis());
 }
